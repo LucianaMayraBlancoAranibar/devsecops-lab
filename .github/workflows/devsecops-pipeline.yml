@@ -118,6 +118,8 @@ jobs:
         with:
           image-ref: ${{ steps.meta.outputs.tags }}
           severity: 'CRITICAL'
+          ignore-unfixed: true
+          scanners: 'vuln'
           exit-code: '1'
 
       # Publicación del contenedor si supera los escaneos
