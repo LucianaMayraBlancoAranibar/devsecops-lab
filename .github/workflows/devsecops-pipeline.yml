@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      IMAGE_NAME: lucianamayrablancoaranibar/devsecops-lab
     steps:
       - uses: actions/checkout@v4
 
@@ -88,7 +88,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: type=sha
+          tags: type=sha,format=long
 
       - name: Compilar Imagen Docker Local
         uses: docker/build-push-action@v5
@@ -134,7 +134,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      IMAGE_NAME: lucianamayrablancoaranibar/devsecops-lab
     steps:
       - name: Instalar Cosign
         uses: sigstore/cosign-installer@v3.5.0

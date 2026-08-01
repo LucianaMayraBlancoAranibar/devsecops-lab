@@ -1,6 +1,3 @@
-#checkov:skip=CKV_AWS_18: "Bucket logging no requerido en lab"
-#checkov:skip=CKV_AWS_144: "Replicacion no requerida en lab"
-
 provider "aws" {
   region = "us-east-1"
 }
@@ -19,6 +16,7 @@ resource "aws_s3_bucket_public_access_block" "publico" {
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "cifrado" {
   bucket = aws_s3_bucket.bucket_seguro.id
+
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm = "AES256"
@@ -28,6 +26,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cifrado" {
 
 resource "aws_s3_bucket_versioning" "versionado" {
   bucket = aws_s3_bucket.bucket_seguro.id
+
   versioning_configuration {
     status = "Enabled"
   }
@@ -35,9 +34,10 @@ resource "aws_s3_bucket_versioning" "versionado" {
 
 resource "aws_security_group" "sg_seguro" {
   name        = "sg_ssh_restringido"
-  description = "Grupo de seguridad restringido para lab"
+  description = "Grupo de seguridad restringido para el laboratorio"
 
   ingress {
+    description = "Acceso SSH permitido solamente desde la red privada del laboratorio"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
