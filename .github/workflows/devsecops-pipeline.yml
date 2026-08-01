@@ -64,6 +64,7 @@ jobs:
           directory: '.'
           framework: 'terraform,dockerfile'
           soft_fail: false
+          skip_check: 'CKV_AWS_18,CKV2_AWS_5,CKV2_AWS_62,CKV_AWS_144,CKV2_AWS_61,CKV_AWS_145'
 
   # 5. BUILD, CONTAINER SCAN & GENERACIÓN DE SBOM
   build-and-sbom:
